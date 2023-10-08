@@ -1,0 +1,40 @@
+
+
+
+
+<div class="container my-5">
+    <h2>Cart Details :</h2>
+        <div class="bg-main-light" *ngIf="cartDetails?.data">
+            <div class="d-flex justify-content-between p-5">
+                <div class="total-items">
+                    <h2>total items: <span class="text-main2">{{cartDetails.numOfCartItems}}</span></h2>
+                </div>
+                <div class="total-price">
+                    <h2>total price: <span class="text-main2">{{cartDetails.data.totalCartPrice}}</span></h2>
+                    <button class="btn bg-main-yellow">
+                        <a [routerLink]="['/checkout',cartDetails.data._id]">Continue to Pay</a>
+                    </button>
+                </div>
+            </div>
+            <div class="row border-bottom mb-4" *ngFor="let product of cartDetails.data.products | filterProducts">
+                <div class="col-md-1 ">
+                    <img [src]="product.product.imageCover" class="w-100" alt="">
+                </div>
+                <div class="col-md-9">
+                    <h2>{{product.product.title}}</h2>
+                    <p class="text-main2">{{product.product.category.name}}</p>
+                    <div class="d-flex align-items-center">
+                        <p class="text-main2 mb-0">{{product.price}} EGP</p>
+                        <button class="btn ms-4 p-0 text-main">
+                            <i class="fa-regular fa-trash-can" (click)="removeProduct(product.product.id)">Remove</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-update" (click)="updateCount(product.count-1,product.product.id)">-</button>
+                    <span class="mx-2">{{product.count}}</span>
+                    <button class="btn btn-update" (click)="updateCount(product.count+1,product.product.id)">+</button>
+                </div>
+            </div>
+        </div>
+</div>
