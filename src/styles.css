@@ -12,6 +12,7 @@
 }
 
 body{
+      padding-top: 70px;
     font-family: var(--font-family) !important;
 }
 .rating-color
